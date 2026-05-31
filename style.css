@@ -1,0 +1,316 @@
+:root{
+--bg:#05020b;
+--purple:#a855ff;
+--purple-soft:#d8b4fe;
+--red:#ff2d55;
+--red-soft:#ff5c7a;
+--panel:rgba(20,10,40,.65);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Cairo',sans-serif;
+background:var(--bg);
+color:white;
+height:100vh;
+overflow:hidden;
+position:relative;
+}
+
+/* شبكة الخلفية */
+
+.grid{
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(168,85,255,.12) 1px, transparent 1px),
+linear-gradient(90deg, rgba(168,85,255,.12) 1px, transparent 1px);
+background-size:50px 50px;
+opacity:.35;
+animation:gridMove 12s linear infinite;
+}
+
+@keyframes gridMove{
+from{transform:translateY(0);}
+to{transform:translateY(50px);}
+}
+
+/* خطوط الشاشة */
+
+.scanlines{
+position:fixed;
+inset:0;
+pointer-events:none;
+background:
+repeating-linear-gradient(
+to bottom,
+transparent 0px,
+rgba(255,255,255,.02) 2px,
+transparent 4px
+);
+opacity:.5;
+}
+
+/* تشويش خفيف */
+
+.noise{
+position:fixed;
+inset:0;
+pointer-events:none;
+background-image:
+radial-gradient(circle at 20% 20%, rgba(255,255,255,.03), transparent 20%),
+radial-gradient(circle at 80% 40%, rgba(255,255,255,.03), transparent 20%);
+animation:flicker .2s infinite;
+}
+
+@keyframes flicker{
+0%{opacity:.12;}
+50%{opacity:.2;}
+100%{opacity:.12;}
+}
+
+/* الشريط العلوي */
+
+.top-bar{
+height:110px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 30px;
+border-bottom:1px solid rgba(168,85,255,.3);
+background:rgba(10,5,20,.6);
+backdrop-filter:blur(10px);
+}
+
+.logo-container{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.mirai-logo{
+width:80px;
+height:80px;
+filter:drop-shadow(0 0 20px var(--purple));
+}
+
+.logo-text h1{
+font-size:2rem;
+color:var(--purple-soft);
+text-shadow:0 0 20px var(--purple);
+}
+
+.logo-text p{
+color:#bbb;
+}
+
+.status-box,
+.alert-box{
+background:var(--panel);
+padding:12px 20px;
+border:1px solid rgba(168,85,255,.3);
+border-radius:12px;
+text-align:center;
+min-width:140px;
+}
+
+.status-box strong{
+display:block;
+margin-top:5px;
+color:#5cff87;
+}
+
+.alert-box strong{
+display:block;
+margin-top:5px;
+color:#8cff4f;
+}
+
+/* التخطيط */
+
+main{
+display:grid;
+grid-template-columns:260px 1fr 260px;
+height:calc(100vh - 110px);
+}
+
+/* اللوحات الجانبية */
+
+.left-panel,
+.right-panel{
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.panel{
+background:var(--panel);
+border:1px solid rgba(168,85,255,.25);
+border-radius:14px;
+padding:18px;
+box-shadow:0 0 15px rgba(168,85,255,.12);
+}
+
+.panel h3{
+margin-bottom:10px;
+color:var(--purple-soft);
+}
+
+.signal{
+display:flex;
+gap:6px;
+margin-top:10px;
+}
+
+.signal span{
+width:12px;
+background:var(--red);
+border-radius:4px;
+box-shadow:0 0 10px var(--red);
+}
+
+.signal span:nth-child(1){height:15px;}
+.signal span:nth-child(2){height:22px;}
+.signal span:nth-child(3){height:30px;}
+.signal span:nth-child(4){height:38px;}
+.signal span:nth-child(5){height:48px;}
+
+/* الوسط */
+
+.center-panel{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:20px;
+position:relative;
+}
+
+.broadcast-title{
+font-size:4rem;
+color:var(--red);
+text-shadow:
+0 0 10px var(--red),
+0 0 30px var(--red),
+0 0 60px var(--red);
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+50%{
+opacity:.6;
+}
+}
+
+.message-area{
+width:min(900px,90%);
+min-height:260px;
+margin:35px 0;
+padding:35px;
+border:2px solid rgba(255,45,85,.4);
+background:rgba(20,0,0,.25);
+backdrop-filter:blur(8px);
+font-size:1.5rem;
+line-height:2;
+text-align:center;
+box-shadow:
+0 0 25px rgba(255,45,85,.3),
+inset 0 0 30px rgba(255,45,85,.15);
+}
+
+.placeholder{
+color:#aaa;
+}
+
+.receive-btn{
+padding:20px 55px;
+font-size:1.4rem;
+font-weight:700;
+border:none;
+cursor:pointer;
+border-radius:16px;
+background:linear-gradient(
+135deg,
+var(--red),
+#ff0048
+);
+color:white;
+box-shadow:
+0 0 25px var(--red),
+0 0 60px rgba(255,45,85,.4);
+transition:.3s;
+}
+
+.receive-btn:hover{
+transform:scale(1.05);
+}
+
+.progress-wrapper{
+width:min(900px,90%);
+height:10px;
+margin-top:25px;
+background:rgba(255,255,255,.08);
+border-radius:10px;
+overflow:hidden;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:linear-gradient(
+90deg,
+var(--purple),
+var(--red)
+);
+}
+
+.timer{
+margin-top:12px;
+color:#bbb;
+font-size:1rem;
+}
+
+/* الهاتف */
+
+@media(max-width:900px){
+
+body{
+overflow:auto;
+}
+
+main{
+grid-template-columns:1fr;
+height:auto;
+}
+
+.left-panel,
+.right-panel{
+order:2;
+}
+
+.center-panel{
+order:1;
+padding:40px 20px;
+}
+
+.broadcast-title{
+font-size:2.6rem;
+}
+
+.message-area{
+font-size:1.15rem;
+min-height:220px;
+}
+
+.top-bar{
+flex-wrap:wrap;
+height:auto;
+gap:10px;
+}
+}
