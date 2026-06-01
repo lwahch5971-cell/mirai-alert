@@ -6,14 +6,14 @@
     <title>OMNI // CYBER_INTERFACE_v4.0</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- استدعاء مستقر لمكتبة Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body id="cyberSystem">
 
+    <!-- شبكة وخطوط السايبربانك الخلفية -->
     <div class="grid-bg"></div>
     <div class="scanlines"></div>
 
+    <!-- واجهة البيانات العلوية (HUD) -->
     <header class="hud-header">
         <div class="hud-accent-line"></div>
         <div class="header-main">
@@ -23,8 +23,10 @@
         </div>
     </header>
 
+    <!-- مصفوفة توزيع شاشة العرض -->
     <main class="hud-matrix">
         
+        <!-- العمود الأيمن: البيانات الرقمية -->
         <section class="hud-panel panel-right">
             <div class="panel-tag">// DATA_STREAM</div>
             <div class="data-block">
@@ -40,12 +42,16 @@
             <p class="console-text">مشروع OMNI: تم تطويره في منشآت MIRAI السرية كآلة قتل مطلقة لا تعرف الشفقة. تنفيذ الأوامر بكفاءة 100%، نظام نشط ومستقل حالياً.</p>
         </section>
 
+        <!-- المنتصف: شاشة عرض صورة الروبوت بنظام ليزري هولوغرافي متطور -->
         <section class="hud-center">
-            <!-- الحاوية المحدثة للمجسم -->
-            <div class="webgl-container" id="3dCanvasContainer" style="min-height: 400px; position: relative;">
+            <div class="webgl-container" id="visualContainer">
+                <!-- عرض صورة الروبوت المحلية التي سترفعها باسم omni-robot.jpg -->
+                <img src="omni-robot.jpg" alt="OMNI 3D Robot Visual" class="robot-cyber-img">
                 <div class="hud-overlay-aim"></div>
+                <div class="laser-scanner"></div>
             </div>
             
+            <!-- لوحة التحكم بالصوت -->
             <div class="control-center">
                 <button id="audioTrigger" class="cyber-btn">
                     <span class="btn-glitch">INJECT DIAGNOSTIC AUDIO</span>
@@ -54,6 +60,7 @@
             </div>
         </section>
 
+        <!-- العمود الأيسر: القدرات والخصائص -->
         <section class="hud-panel panel-left">
             <div class="panel-tag">// SYSTEM_CAPABILITIES</div>
             <ul class="hud-list">
@@ -73,96 +80,39 @@
 
     </main>
 
+    <!-- الشريط السفلي التكنولوجي للموقع -->
     <footer class="hud-footer">
         <div class="footer-scroller">SYS.LOAD.OMNI_CORE_DATA... SSS_CLASSIFIED_PROTECTION_ENABLED... SYSTEM_OVERRIDE_CONNECTED...</div>
     </footer>
 
-    <!-- الكود المحدث لضمان البناء والأبعاد على الاستضافات الحية -->
+    <!-- كود الجافا سكريبت للتحكم بالصوت ومؤثرات اهتزاز الصورة الرقمية -->
     <script>
-        window.addEventListener('load', () => {
-            const container = document.getElementById('3dCanvasContainer');
-            
-            // جلب الأبعاد بدقة لمنع الـ Render من الفشل
-            let width = container.clientWidth || 400;
-            let height = container.clientHeight || 400;
+        const audio = document.getElementById('coreAudio');
+        const btn = document.getElementById('audioTrigger');
+        const system = document.getElementById('cyberSystem');
+        const visualContainer = document.getElementById('visualContainer');
 
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(width, height);
-            container.appendChild(renderer.domElement);
-
-            // بناء الشبكة الرقمية والمجسم
-            const geometry = new THREE.SphereGeometry(2.2, 20, 20);
-            const wireframe = new THREE.WireframeGeometry(geometry);
-            const material = new THREE.LineBasicMaterial({ 
-                color: 0xff0000, 
-                linewidth: 2,
-                transparent: true,
-                opacity: 0.8 
-            });
-            const sphere = new THREE.LineSegments(wireframe, material);
-            scene.add(sphere);
-
-            const innerGeo = new THREE.IcosahedronGeometry(1, 1);
-            const innerMat = new THREE.MeshBasicMaterial({ color: 0xff3333, wireframe: true, transparent: true, opacity: 0.3 });
-            const innerCore = new THREE.Mesh(innerGeo, innerMat);
-            scene.add(innerCore);
-
-            camera.position.z = 5;
-
-            let mouseX = 0, mouseY = 0;
-            window.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
-                mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
-            });
-
-            function animate() {
-                requestAnimationFrame(animate);
-                sphere.rotation.x += 0.005 + mouseY * 0.03;
-                sphere.rotation.y += 0.005 + mouseX * 0.03;
-                innerCore.rotation.x -= 0.01;
-                innerCore.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            window.addEventListener('resize', () => {
-                let w = container.clientWidth;
-                let h = container.clientHeight;
-                camera.aspect = w / h;
-                camera.updateProjectionMatrix();
-                renderer.setSize(w, h);
-            });
-
-            // لوحة الصوت والتشويش
-            const audio = document.getElementById('coreAudio');
-            const btn = document.getElementById('audioTrigger');
-            const system = document.getElementById('cyberSystem');
-
-            btn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play().catch(e => console.log("Audio play blocked"));
-                    btn.innerText = "OVERRIDE ACTIVE // STOP AUDIO";
-                    btn.classList.add('btn-active');
-                    system.classList.add('hud-glitch-active');
-                    material.color.setHex(0xff3333);
-                } else {
-                    audio.pause();
-                    resetHUD();
-                }
-            });
-
-            audio.addEventListener('ended', resetHUD);
-
-            function resetHUD() {
-                btn.innerText = "INJECT DIAGNOSTIC AUDIO";
-                btn.classList.remove('btn-active');
-                system.classList.remove('hud-glitch-active');
-                material.color.setHex(0xff0000);
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio play blocked"));
+                btn.innerText = "OVERRIDE ACTIVE // STOP AUDIO";
+                btn.classList.add('btn-active');
+                system.classList.add('hud-glitch-active'); // وميض النظام
+                visualContainer.classList.add('image-shake-active'); // اهتزاز الصورة مع الصوت
+            } else {
+                audio.pause();
+                resetHUD();
             }
         });
+
+        audio.addEventListener('ended', resetHUD);
+
+        function resetHUD() {
+            btn.innerText = "INJECT DIAGNOSTIC AUDIO";
+            btn.classList.remove('btn-active');
+            system.classList.remove('hud-glitch-active');
+            visualContainer.classList.remove('image-shake-active');
+        }
     </script>
 </body>
 </html>
