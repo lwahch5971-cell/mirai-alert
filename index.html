@@ -6,16 +6,14 @@
     <title>OMNI // CYBER_INTERFACE_v4.0</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- استدعاء مكتبة Three.js لبناء العرض ثلاثي الأبعاد -->
-    <script src="https://cloudflare.com"></script>
+    <!-- استدعاء مستقر لمكتبة Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body id="cyberSystem">
 
-    <!-- خطوط التشويش والشبكة الخلفية للسايبربانك -->
     <div class="grid-bg"></div>
     <div class="scanlines"></div>
 
-    <!-- واجهة البيانات العلوية (HUD Top) -->
     <header class="hud-header">
         <div class="hud-accent-line"></div>
         <div class="header-main">
@@ -25,10 +23,8 @@
         </div>
     </header>
 
-    <!-- مساحة العرض الرئيسية ثلاثية الأبعاد -->
     <main class="hud-matrix">
         
-        <!-- العمود الأيمن المتطور: البيانات الرقمية -->
         <section class="hud-panel panel-right">
             <div class="panel-tag">// DATA_STREAM</div>
             <div class="data-block">
@@ -44,14 +40,12 @@
             <p class="console-text">مشروع OMNI: تم تطويره في منشآت MIRAI السرية كآلة قتل مطلقة لا تعرف الشفقة. تنفيذ الأوامر بكفاءة 100%، نظام نشط ومستقل حالياً.</p>
         </section>
 
-        <!-- المنتصف: محرك العرض ثلاثي الأبعاد التفاعلي -->
         <section class="hud-center">
-            <div class="webgl-container" id="3dCanvasContainer">
-                <!-- هنا سيتم توليد مجسم السايبربانك ثلاثي الأبعاد -->
+            <!-- الحاوية المحدثة للمجسم -->
+            <div class="webgl-container" id="3dCanvasContainer" style="min-height: 400px; position: relative;">
                 <div class="hud-overlay-aim"></div>
             </div>
             
-            <!-- أزرار التحكم الصوتي المدمجة في النظام -->
             <div class="control-center">
                 <button id="audioTrigger" class="cyber-btn">
                     <span class="btn-glitch">INJECT DIAGNOSTIC AUDIO</span>
@@ -60,7 +54,6 @@
             </div>
         </section>
 
-        <!-- العمود الأيسر المتطور: القدرات والثغرات -->
         <section class="hud-panel panel-left">
             <div class="panel-tag">// SYSTEM_CAPABILITIES</div>
             <ul class="hud-list">
@@ -80,97 +73,96 @@
 
     </main>
 
-    <!-- شريط المهام السفلي -->
     <footer class="hud-footer">
         <div class="footer-scroller">SYS.LOAD.OMNI_CORE_DATA... SSS_CLASSIFIED_PROTECTION_ENABLED... SYSTEM_OVERRIDE_CONNECTED...</div>
     </footer>
 
-    <!-- كود التحريك البرمجي والمحرك ثلاثي الأبعاد Three.js -->
+    <!-- الكود المحدث لضمان البناء والأبعاد على الاستضافات الحية -->
     <script>
-        // إعدادات محرك Three.js لبناء مجسم 3D السايبربانك
-        const container = document.getElementById('3dCanvasContainer');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
-
-        // بناء مجسم رقمي (Cyber-Sphere) ثلاثي الأبعاد بالخطوط المضيئة
-        const geometry = new THREE.SphereGeometry(2.2, 20, 20);
-        const wireframe = new THREE.WireframeGeometry(geometry);
-        const material = new THREE.LineBasicMaterial({ 
-            color: 0xff0000, 
-            linewidth: 2,
-            transparent: true,
-            opacity: 0.8 
-        });
-        const sphere = new THREE.LineSegments(wireframe, material);
-        scene.add(sphere);
-
-        // إضافة نواة داخلية مضيئة للمجسم
-        const innerGeo = new THREE.IcosahedronGeometry(1, 1);
-        const innerMat = new THREE.MeshBasicMaterial({ color: 0xff3333, wireframe: true, transparent: true, opacity: 0.3 });
-        const innerCore = new THREE.Mesh(innerGeo, innerMat);
-        scene.add(innerCore);
-
-        camera.position.z = 5;
-
-        // تتبع حركة الفأرة لجعل المجسم ثلاثي الأبعاد يتفاعل مع المستخدم
-        let mouseX = 0, mouseY = 0;
-        window.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
-            mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
-        });
-
-        // حلقة التحريك والتدوير المستمر (Animation Loop)
-        function animate() {
-            requestAnimationFrame(animate);
+        window.addEventListener('load', () => {
+            const container = document.getElementById('3dCanvasContainer');
             
-            // دوران تلقائي خفيف مضاف إليه تفاعل حركة الفأرة
-            sphere.rotation.x += 0.005 + mouseY * 0.05;
-            sphere.rotation.y += 0.005 + mouseX * 0.05;
+            // جلب الأبعاد بدقة لمنع الـ Render من الفشل
+            let width = container.clientWidth || 400;
+            let height = container.clientHeight || 400;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             
-            innerCore.rotation.x -= 0.01;
-            innerCore.rotation.y += 0.01;
+            renderer.setSize(width, height);
+            container.appendChild(renderer.domElement);
 
-            renderer.render(scene, camera);
-        }
-        animate();
+            // بناء الشبكة الرقمية والمجسم
+            const geometry = new THREE.SphereGeometry(2.2, 20, 20);
+            const wireframe = new THREE.WireframeGeometry(geometry);
+            const material = new THREE.LineBasicMaterial({ 
+                color: 0xff0000, 
+                linewidth: 2,
+                transparent: true,
+                opacity: 0.8 
+            });
+            const sphere = new THREE.LineSegments(wireframe, material);
+            scene.add(sphere);
 
-        // ملاءمة حجم الشاشة ثلاثية الأبعاد عند تكبير أو تصغير المتصفح
-        window.addEventListener('resize', () => {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        });
+            const innerGeo = new THREE.IcosahedronGeometry(1, 1);
+            const innerMat = new THREE.MeshBasicMaterial({ color: 0xff3333, wireframe: true, transparent: true, opacity: 0.3 });
+            const innerCore = new THREE.Mesh(innerGeo, innerMat);
+            scene.add(innerCore);
 
-        // نظام التحكم بالصوت ومؤثرات السايبربانك الدرامية
-        const audio = document.getElementById('coreAudio');
-        const btn = document.getElementById('audioTrigger');
-        const system = document.getElementById('cyberSystem');
+            camera.position.z = 5;
 
-        btn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                btn.innerText = "OVERRIDE ACTIVE // STOP AUDIO";
-                btn.classList.add('btn-active');
-                system.classList.add('hud-glitch-active'); // تشغيل نبض السايبربانك الأحمر مع الصوت
-                material.color.setHex(0xff3333); // زيادة توهج اللون الأحمر للمجسم
-            } else {
-                audio.pause();
-                resetHUD();
+            let mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                sphere.rotation.x += 0.005 + mouseY * 0.03;
+                sphere.rotation.y += 0.005 + mouseX * 0.03;
+                innerCore.rotation.x -= 0.01;
+                innerCore.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                let w = container.clientWidth;
+                let h = container.clientHeight;
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.setSize(w, h);
+            });
+
+            // لوحة الصوت والتشويش
+            const audio = document.getElementById('coreAudio');
+            const btn = document.getElementById('audioTrigger');
+            const system = document.getElementById('cyberSystem');
+
+            btn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().catch(e => console.log("Audio play blocked"));
+                    btn.innerText = "OVERRIDE ACTIVE // STOP AUDIO";
+                    btn.classList.add('btn-active');
+                    system.classList.add('hud-glitch-active');
+                    material.color.setHex(0xff3333);
+                } else {
+                    audio.pause();
+                    resetHUD();
+                }
+            });
+
+            audio.addEventListener('ended', resetHUD);
+
+            function resetHUD() {
+                btn.innerText = "INJECT DIAGNOSTIC AUDIO";
+                btn.classList.remove('btn-active');
+                system.classList.remove('hud-glitch-active');
+                material.color.setHex(0xff0000);
             }
         });
-
-        audio.addEventListener('ended', resetHUD);
-
-        function resetHUD() {
-            btn.innerText = "INJECT DIAGNOSTIC AUDIO";
-            btn.classList.remove('btn-active');
-            system.classList.remove('hud-glitch-active');
-            material.color.setHex(0xff0000);
-        }
     </script>
 </body>
 </html>
