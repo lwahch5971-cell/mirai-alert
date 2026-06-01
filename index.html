@@ -3,139 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNI - مشروع القتل المطلق</title>
+    <title>OMNI // CYBER_INTERFACE_v4.0</title>
     <link rel="stylesheet" href="style.css">
-    <!-- ربط خط Cairo من جوجل لضمان مظهر نصوص احترافي ومتناسق -->
     <link href="https://googleapis.com" rel="stylesheet">
+    <!-- استدعاء مكتبة Three.js لبناء العرض ثلاثي الأبعاد -->
+    <script src="https://cloudflare.com"></script>
 </head>
-<body id="siteBody">
+<body id="cyberSystem">
 
-    <!-- شريط الحالة العلوي السري للشركة المطورة -->
-    <header class="top-bar">
-        <div class="right-side">MIRAI CORPORATION <br> <span>إدارة المشاريع السرية</span></div>
-        <div class="center-side">CLASSIFICATION: SSS</div>
-        <div class="left-side">ملف سري للغاية <br> <span class="danger-text">غير مصرح بالاطلاع</span></div>
+    <!-- خطوط التشويش والشبكة الخلفية للسايبربانك -->
+    <div class="grid-bg"></div>
+    <div class="scanlines"></div>
+
+    <!-- واجهة البيانات العلوية (HUD Top) -->
+    <header class="hud-header">
+        <div class="hud-accent-line"></div>
+        <div class="header-main">
+            <div class="sys-status">[ SYSTEM: ACTIVE ]<br><span class="blink-text">CORE_TEMP: NOMINAL</span></div>
+            <div class="sys-logo">OMNI // PROJECT_01</div>
+            <div class="sys-security">CLASSIFICATION: SSS<br><span class="danger-neon">CRITICAL SECURITY BREACH</span></div>
+        </div>
     </header>
 
-    <main class="container">
+    <!-- مساحة العرض الرئيسية ثلاثية الأبعاد -->
+    <main class="hud-matrix">
         
-        <!-- العنوان الرئيسي والنمط الجمالي العسكري للروبوت -->
-        <section class="hero-title">
-            <h1 class="glitch-text" data-text="OMNI">OMNI</h1>
-            <h2>أومني - مشروع القتل المطلق</h2>
+        <!-- العمود الأيمن المتطور: البيانات الرقمية -->
+        <section class="hud-panel panel-right">
+            <div class="panel-tag">// DATA_STREAM</div>
+            <div class="data-block">
+                <div class="data-row"><span class="label">UNIT_ID:</span> <span class="val">OMNI_v1.0</span></div>
+                <div class="data-row"><span class="label">CLASS:</span> <span class="val">ASSASSIN_UNIT</span></div>
+                <div class="data-row"><span class="label">MANUFACTURER:</span> <span class="val">MIRAI_CORP</span></div>
+                <div class="data-row"><span class="label">HEIGHT:</span> <span class="val">2.35 M</span></div>
+                <div class="data-row"><span class="label">WEIGHT:</span> <span class="val">310 KG</span></div>
+                <div class="data-row"><span class="label">ENERGY:</span> <span class="val">COLD_FUSION</span></div>
+            </div>
+            
+            <div class="panel-tag" style="margin-top: 20px;">// LOG_FILE</div>
+            <p class="console-text">مشروع OMNI: تم تطويره في منشآت MIRAI السرية كآلة قتل مطلقة لا تعرف الشفقة. تنفيذ الأوامر بكفاءة 100%، نظام نشط ومستقل حالياً.</p>
         </section>
 
-        <!-- الهيكل التخطيطي الرئيسي (مقسم إلى 3 أعمدة) -->
-        <div class="grid-layout">
+        <!-- المنتصف: محرك العرض ثلاثي الأبعاد التفاعلي -->
+        <section class="hud-center">
+            <div class="webgl-container" id="3dCanvasContainer">
+                <!-- هنا سيتم توليد مجسم السايبربانك ثلاثي الأبعاد -->
+                <div class="hud-overlay-aim"></div>
+            </div>
             
-            <!-- العمود الأيمن: البيانات الأساسية للروبوت وخلفيته القصصية -->
-            <aside class="side-column">
-                <div class="card">
-                    <h3>📊 البيانات الأساسية</h3>
-                    <ul>
-                        <li><strong>الاسم:</strong> أومني (OMNI)</li>
-                        <li><strong>التصنيف:</strong> وحدة قتل متقدمة</li>
-                        <li><strong>المطور:</strong> شركة ميرام (MIRAI)</li>
-                        <li><strong>الارتفاع / الوزن:</strong> 2.35 متر / 310 كغ</li>
-                        <li><strong>مصدر الطاقة:</strong> مفاعل طاقة مصغر (اندماج بارد)</li>
-                        <li><strong>المادة الخارجية:</strong> سبائك تيتانيوم - سيراميك نانو</li>
-                    </ul>
-                </div>
-<!-- كود شاشة العرض بعد تعديله ليقرأ صورتك المحلية -->
-<div class="main-visual" id="visualContainer">
-    <img src="omni-robot.png" alt="OMNI Robot Visual" class="robot-img">
-    <div class="scan-line"></div>
-</div>
+            <!-- أزرار التحكم الصوتي المدمجة في النظام -->
+            <div class="control-center">
+                <button id="audioTrigger" class="cyber-btn">
+                    <span class="btn-glitch">INJECT DIAGNOSTIC AUDIO</span>
+                </button>
+                <audio id="coreAudio" src="omni-voice.mp3"></audio>
+            </div>
+        </section>
 
-                <div class="card">
-                    <h3>📜 الخلفية والأصل</h3>
-                    <p>أُطلق مشروع أومني في شركة ميرام كأول نموذج للوحدات القتالية المتقدمة. تم تصميمه ليكون أكثر من مجرد آلة، بل منظومة متكاملة للقتل والتنفيذ بأحدث التقنيات العسكرية والهندسية.</p>
-                </div>
-            </aside>
+        <!-- العمود الأيسر المتطور: القدرات والثغرات -->
+        <section class="hud-panel panel-left">
+            <div class="panel-tag">// SYSTEM_CAPABILITIES</div>
+            <ul class="hud-list">
+                <li>+ قوة بدنية تتجاوز المقاييس البشرية.</li>
+                <li>+ ردود أفعال وسرعة حركة تفوق الإدراك.</li>
+                <li>+ درع تيتانيوم مقاوم للحمم والكيميائيات.</li>
+                <li>+ أنظمة استهداف ليزرية مدمجة ومتطورة.</li>
+            </ul>
 
-            <!-- العمود الأوسط: شاشة العرض المرئي المركزي وأزرار التحكم بالصوت -->
-            <section class="center-column">
-                <div class="main-visual" id="visualContainer">
-                    <!-- يرجى وضع مسار صورتك الحقيقية هنا بدلاً من الرابط العشوائي لتظهر في التصميم -->
-                    <img src="https://unsplash.com" alt="OMNI Robot Visual" class="robot-img">
-                    <div class="scan-line"></div>
-                </div>
-
-                <!-- لوحة التحكم لتشغيل التقرير الصوتي المتطابق مع النصوص -->
-                <div class="audio-panel">
-                    <button id="playBtn" class="audio-btn">
-                        <span class="icon">▶</span> تشغيل التقرير الصوتي التشخيصي
-                    </button>
-                    <!-- ضع ملف الصوت الذي ستسجله في نفس المجلد وسمّه omni-voice.mp3 -->
-                    <audio id="omniAudio" src="omni-voice.mp3"></audio>
-                </div>
-
-                <div class="card profile-card">
-                    <h3>🔍 نبذة تعريفية</h3>
-                    <p>أومني هو النموذج الأول لسلسلة الوحدات القتالية التي طورتها شركة ميرام. صُمم كآلة قتل مطلقة لا تعرف الشفقة، يقوم بتنفيذ الأوامر بأعلى درجات الكفاءة والدقة ولا يتوقف حتى تكتمل المهمة.</p>
-                </div>
-            </section>
-
-            <!-- العمود الأيسر: القدرات التدميرية والثغرات الأمنية (نقاط الضعف) -->
-            <aside class="side-column">
-                <div class="card">
-                    <h3>⚡ القدرات والخصائص</h3>
-                    <ul>
-                        <li><strong>القوة البدنية:</strong> يتجاوز القدرة الجسدية للبشر بمراحل.</li>
-                        <li><strong>السرعة والردود:</strong> سرعة حركة تفوق الإدراك البشري.</li>
-                        <li><strong>التحمل والمناعة:</strong> هيكل خارجي مقاوم للصدمات والحمّم والمواد الكيميائية.</li>
-                        <li><strong>أنظمة القتل المتكاملة:</strong> مزود بمجموعة متنوعة من الأسلحة المدمجة الذكية.</li>
-                    </ul>
-                </div>
-
-                <div class="card danger-card">
-                    <h3>⚠️ نقاط الضعف</h3>
-                    <ul>
-                        <li>يعتمد على مصدر الطاقة الداخلي، تدميره يؤدي لإيقاف الوحدة.</li>
-                        <li>نقطة ضعف ميكانيكية في المنطقة القفصية (أسفل الجمجمة).</li>
-                        <li>يمكن تعطيل أنظمته مؤقتاً بتداخل كهرومغناطيسي قوي جداً.</li>
-                    </ul>
-                </div>
-            </aside>
-
-        </div>
+            <div class="panel-tag danger-tag" style="margin-top: 20px;">// CRITICAL_WEAKNESS</div>
+            <ul class="hud-list danger-list">
+                <li>! مفاعل الطاقة الداخلي (تدميره يعطل الوحدة).</li>
+                <li>! ثغرة ميكانيكية أسفل الجمجمة (المنطقة القفصية).</li>
+                <li>! حساسية مؤقتة للموجات الكهرومغناطيسية النبضية EMP.</li>
+            </ul>
+        </section>
 
     </main>
 
-    <!-- تذييل الصفحة المشفر -->
-    <footer class="footer-bar">
-        <div>OMNI - DOSSIER - MIRAI - SSS - CLASSIFIED</div>
+    <!-- شريط المهام السفلي -->
+    <footer class="hud-footer">
+        <div class="footer-scroller">SYS.LOAD.OMNI_CORE_DATA... SSS_CLASSIFIED_PROTECTION_ENABLED... SYSTEM_OVERRIDE_CONNECTED...</div>
     </footer>
 
-    <!-- كود الجافا سكريبت التفاعلي لربط الصوت بتأثيرات التشويش والألوان والاهتزاز -->
+    <!-- كود التحريك البرمجي والمحرك ثلاثي الأبعاد Three.js -->
     <script>
-        const audio = document.getElementById('omniAudio');
-        const playBtn = document.getElementById('playBtn');
-        const siteBody = document.getElementById('siteBody');
-        const visualContainer = document.getElementById('visualContainer');
+        // إعدادات محرك Three.js لبناء مجسم 3D السايبربانك
+        const container = document.getElementById('3dCanvasContainer');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
 
-        playBtn.addEventListener('click', () => {
+        // بناء مجسم رقمي (Cyber-Sphere) ثلاثي الأبعاد بالخطوط المضيئة
+        const geometry = new THREE.SphereGeometry(2.2, 20, 20);
+        const wireframe = new THREE.WireframeGeometry(geometry);
+        const material = new THREE.LineBasicMaterial({ 
+            color: 0xff0000, 
+            linewidth: 2,
+            transparent: true,
+            opacity: 0.8 
+        });
+        const sphere = new THREE.LineSegments(wireframe, material);
+        scene.add(sphere);
+
+        // إضافة نواة داخلية مضيئة للمجسم
+        const innerGeo = new THREE.IcosahedronGeometry(1, 1);
+        const innerMat = new THREE.MeshBasicMaterial({ color: 0xff3333, wireframe: true, transparent: true, opacity: 0.3 });
+        const innerCore = new THREE.Mesh(innerGeo, innerMat);
+        scene.add(innerCore);
+
+        camera.position.z = 5;
+
+        // تتبع حركة الفأرة لجعل المجسم ثلاثي الأبعاد يتفاعل مع المستخدم
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+        });
+
+        // حلقة التحريك والتدوير المستمر (Animation Loop)
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // دوران تلقائي خفيف مضاف إليه تفاعل حركة الفأرة
+            sphere.rotation.x += 0.005 + mouseY * 0.05;
+            sphere.rotation.y += 0.005 + mouseX * 0.05;
+            
+            innerCore.rotation.x -= 0.01;
+            innerCore.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // ملاءمة حجم الشاشة ثلاثية الأبعاد عند تكبير أو تصغير المتصفح
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        // نظام التحكم بالصوت ومؤثرات السايبربانك الدرامية
+        const audio = document.getElementById('coreAudio');
+        const btn = document.getElementById('audioTrigger');
+        const system = document.getElementById('cyberSystem');
+
+        btn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
-                playBtn.innerHTML = '<span class="icon">⏸</span> إيقاف التقرير الصوتي';
-                playBtn.classList.add('playing');
-                siteBody.classList.add('system-glitch'); // تنشيط الوميض الأحمر بالخلفية
-                visualContainer.classList.add('image-glitch'); // تشغيل الاهتزاز للشاشة المركزية
+                btn.innerText = "OVERRIDE ACTIVE // STOP AUDIO";
+                btn.classList.add('btn-active');
+                system.classList.add('hud-glitch-active'); // تشغيل نبض السايبربانك الأحمر مع الصوت
+                material.color.setHex(0xff3333); // زيادة توهج اللون الأحمر للمجسم
             } else {
                 audio.pause();
-                resetSystemEffects();
+                resetHUD();
             }
         });
 
-        audio.addEventListener('ended', () => {
-            resetSystemEffects(); // إعادة تهيئة الواجهة عند انتهاء المقطع تلقائياً
-        });
+        audio.addEventListener('ended', resetHUD);
 
-        function resetSystemEffects() {
-            playBtn.innerHTML = '<span class="icon">▶</span> تشغيل التقرير الصوتي التشخيصي';
-            playBtn.classList.remove('playing');
-            siteBody.classList.remove('system-glitch');
-            visualContainer.classList.remove('image-glitch');
+        function resetHUD() {
+            btn.innerText = "INJECT DIAGNOSTIC AUDIO";
+            btn.classList.remove('btn-active');
+            system.classList.remove('hud-glitch-active');
+            material.color.setHex(0xff0000);
         }
     </script>
 </body>
