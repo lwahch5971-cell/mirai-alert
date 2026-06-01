@@ -1,143 +1,137 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نظام ميراي المركزي</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMNI - مشروع القتل المطلق</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- ربط خط Cairo من جوجل لضمان مظهر نصوص احترافي ومتناسق -->
+    <link href="https://googleapis.com" rel="stylesheet">
 </head>
+<body id="siteBody">
 
-<body>
+    <!-- شريط الحالة العلوي السري للشركة المطورة -->
+    <header class="top-bar">
+        <div class="right-side">MIRAI CORPORATION <br> <span>إدارة المشاريع السرية</span></div>
+        <div class="center-side">CLASSIFICATION: SSS</div>
+        <div class="left-side">ملف سري للغاية <br> <span class="danger-text">غير مصرح بالاطلاع</span></div>
+    </header>
 
-<div class="grid"></div>
-<div class="scanlines"></div>
-<div class="noise"></div>
+    <main class="container">
+        
+        <!-- العنوان الرئيسي والنمط الجمالي العسكري للروبوت -->
+        <section class="hero-title">
+            <h1 class="glitch-text" data-text="OMNI">OMNI</h1>
+            <h2>أومني - مشروع القتل المطلق</h2>
+        </section>
 
-<header class="top-bar">
+        <!-- الهيكل التخطيطي الرئيسي (مقسم إلى 3 أعمدة) -->
+        <div class="grid-layout">
+            
+            <!-- العمود الأيمن: البيانات الأساسية للروبوت وخلفيته القصصية -->
+            <aside class="side-column">
+                <div class="card">
+                    <h3>📊 البيانات الأساسية</h3>
+                    <ul>
+                        <li><strong>الاسم:</strong> أومني (OMNI)</li>
+                        <li><strong>التصنيف:</strong> وحدة قتل متقدمة</li>
+                        <li><strong>المطور:</strong> شركة ميرام (MIRAI)</li>
+                        <li><strong>الارتفاع / الوزن:</strong> 2.35 متر / 310 كغ</li>
+                        <li><strong>مصدر الطاقة:</strong> مفاعل طاقة مصغر (اندماج بارد)</li>
+                        <li><strong>المادة الخارجية:</strong> سبائك تيتانيوم - سيراميك نانو</li>
+                    </ul>
+                </div>
 
-<div class="logo-container">
+                <div class="card">
+                    <h3>📜 الخلفية والأصل</h3>
+                    <p>أُطلق مشروع أومني في شركة ميرام كأول نموذج للوحدات القتالية المتقدمة. تم تصميمه ليكون أكثر من مجرد آلة، بل منظومة متكاملة للقتل والتنفيذ بأحدث التقنيات العسكرية والهندسية.</p>
+                </div>
+            </aside>
 
-<svg class="mirai-logo" viewBox="0 0 200 200">
+            <!-- العمود الأوسط: شاشة العرض المرئي المركزي وأزرار التحكم بالصوت -->
+            <section class="center-column">
+                <div class="main-visual" id="visualContainer">
+                    <!-- يرجى وضع مسار صورتك الحقيقية هنا بدلاً من الرابط العشوائي لتظهر في التصميم -->
+                    <img src="https://unsplash.com" alt="OMNI Robot Visual" class="robot-img">
+                    <div class="scan-line"></div>
+                </div>
 
-<polygon
-points="100,10 170,50 170,150 100,190 30,150 30,50"
-fill="none"
-stroke="#a855ff"
-stroke-width="6"/>
+                <!-- لوحة التحكم لتشغيل التقرير الصوتي المتطابق مع النصوص -->
+                <div class="audio-panel">
+                    <button id="playBtn" class="audio-btn">
+                        <span class="icon">▶</span> تشغيل التقرير الصوتي التشخيصي
+                    </button>
+                    <!-- ضع ملف الصوت الذي ستسجله في نفس المجلد وسمّه omni-voice.mp3 -->
+                    <audio id="omniAudio" src="omni-voice.mp3"></audio>
+                </div>
 
-<path
-d="M60 140 V60 L100 105 L140 60 V140"
-fill="none"
-stroke="#d8b4fe"
-stroke-width="12"
-stroke-linejoin="round"/>
+                <div class="card profile-card">
+                    <h3>🔍 نبذة تعريفية</h3>
+                    <p>أومني هو النموذج الأول لسلسلة الوحدات القتالية التي طورتها شركة ميرام. صُمم كآلة قتل مطلقة لا تعرف الشفقة، يقوم بتنفيذ الأوامر بأعلى درجات الكفاءة والدقة ولا يتوقف حتى تكتمل المهمة.</p>
+                </div>
+            </section>
 
-</svg>
+            <!-- العمود الأيسر: القدرات التدميرية والثغرات الأمنية (نقاط الضعف) -->
+            <aside class="side-column">
+                <div class="card">
+                    <h3>⚡ القدرات والخصائص</h3>
+                    <ul>
+                        <li><strong>القوة البدنية:</strong> يتجاوز القدرة الجسدية للبشر بمراحل.</li>
+                        <li><strong>السرعة والردود:</strong> سرعة حركة تفوق الإدراك البشري.</li>
+                        <li><strong>التحمل والمناعة:</strong> هيكل خارجي مقاوم للصدمات والحمّم والمواد الكيميائية.</li>
+                        <li><strong>أنظمة القتل المتكاملة:</strong> مزود بمجموعة متنوعة من الأسلحة المدمجة الذكية.</li>
+                    </ul>
+                </div>
 
-<div class="logo-text">
-<h1>ميراي</h1>
-<p>النظام المركزي</p>
-</div>
+                <div class="card danger-card">
+                    <h3>⚠️ نقاط الضعف</h3>
+                    <ul>
+                        <li>يعتمد على مصدر الطاقة الداخلي، تدميره يؤدي لإيقاف الوحدة.</li>
+                        <li>نقطة ضعف ميكانيكية في المنطقة القفصية (أسفل الجمجمة).</li>
+                        <li>يمكن تعطيل أنظمته مؤقتاً بتداخل كهرومغناطيسي قوي جداً.</li>
+                    </ul>
+                </div>
+            </aside>
 
-</div>
+        </div>
 
-<div class="status-box">
-<span>حالة النظام</span>
-<strong id="systemState">مستقر</strong>
-</div>
+    </main>
 
-<div class="alert-box">
-<span>مستوى الخطر</span>
-<strong id="alertLevel">أخضر</strong>
-</div>
+    <!-- تذييل الصفحة المشفر -->
+    <footer class="footer-bar">
+        <div>OMNI - DOSSIER - MIRAI - SSS - CLASSIFIED</div>
+    </footer>
 
-</header>
+    <!-- كود الجافا سكريبت التفاعلي لربط الصوت بتأثيرات التشويش والألوان والاهتزاز -->
+    <script>
+        const audio = document.getElementById('omniAudio');
+        const playBtn = document.getElementById('playBtn');
+        const siteBody = document.getElementById('siteBody');
+        const visualContainer = document.getElementById('visualContainer');
 
-<main>
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<span class="icon">⏸</span> إيقاف التقرير الصوتي';
+                playBtn.classList.add('playing');
+                siteBody.classList.add('system-glitch'); // تنشيط الوميض الأحمر بالخلفية
+                visualContainer.classList.add('image-glitch'); // تشغيل الاهتزاز للشاشة المركزية
+            } else {
+                audio.pause();
+                resetSystemEffects();
+            }
+        });
 
-<section class="center-panel">
+        audio.addEventListener('ended', () => {
+            resetSystemEffects(); // إعادة تهيئة الواجهة عند انتهاء المقطع تلقائياً
+        });
 
-<h2 class="broadcast-title">
-بث طارئ
-</h2>
-
-<div id="messageArea" class="message-area">
-
-<p class="placeholder">
-اضغط على زر استقبال البث لبدء الاتصال بالقناة المركزية...
-</p>
-
-</div>
-
-<button id="receiveBtn" class="receive-btn">
-استقبال البث
-</button>
-
-<div class="progress-wrapper">
-<div id="progressBar" class="progress-bar"></div>
-</div>
-
-<div id="timer" class="timer">
-00:00 / 00:21
-</div>
-
-</section>
-
-<aside class="left-panel">
-
-<div class="panel">
-<h3>البرج المركزي</h3>
-<p>برج ميراي</p>
-</div>
-
-<div class="panel">
-<h3>الشبكة</h3>
-<p>القناة المشفرة متاحة</p>
-</div>
-
-<div class="panel">
-<h3>إغلاق القطاعات</h3>
-<p>جميع القطاعات آمنة</p>
-</div>
-
-</aside>
-
-<aside class="right-panel">
-
-<div class="panel">
-<h3>قوة الإشارة</h3>
-<div class="signal">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-
-<div class="panel">
-<h3>مدة البث</h3>
-<p>21 ثانية</p>
-</div>
-
-<div class="panel">
-<h3>القناة</h3>
-<p>طوارئ ميراي</p>
-</div>
-
-</aside>
-
-</main>
-
-<audio id="miraiAudio">
-<source src="mirai.mp3" type="audio/mpeg">
-</audio>
-
-<script src="script.js"></script>
-
+        function resetSystemEffects() {
+            playBtn.innerHTML = '<span class="icon">▶</span> تشغيل التقرير الصوتي التشخيصي';
+            playBtn.classList.remove('playing');
+            siteBody.classList.remove('system-glitch');
+            visualContainer.classList.remove('image-glitch');
+        }
+    </script>
 </body>
 </html>
